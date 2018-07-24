@@ -1,6 +1,6 @@
 const http = require('http')
 const net = require('net')
-const PacketHub = require('./PacketHub')
+const PacketHub = require('./PacketHub2')
 const util = require('./util')
 const Emit = require('./EventEmit')
 

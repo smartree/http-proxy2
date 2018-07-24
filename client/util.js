@@ -7,7 +7,7 @@ const util = {
     return Buffer.concat([_buf, buf], 16 + length)
   },
   generateKey: () => {
-    return ~~(Math.random() * 1e9)
+    return ~~(Math.random() * 1e8)
   },
   objToStr: (obj) => {
     let retValue = []
