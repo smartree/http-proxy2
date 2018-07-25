@@ -28,7 +28,7 @@ class Packet {
     try {
       this.packetLength = this.originalData.readUIntBE(0, 8)
       this.key = this.originalData.readUIntBE(8, 8)
-      if (`${this.key}`.length > 8) {
+      if (`${this.key}`.length !== 7) {
         throw new Error('not start Packet')
       }
       this.isStartPacket = true
@@ -41,6 +41,8 @@ class Packet {
       this.key = null
       this.packetData = this.originalData
     }
+    console.log(`pl: ${this.packetLength}`)
+    console.log(`key: ${this.key}`)
   }
 }
 

@@ -1,6 +1,6 @@
 const http = require('http')
 const net = require('net')
-const PacketHub = require('./PacketHub2')
+const PacketHub = require('./PacketHub3')
 const util = require('./util')
 const Emit = require('./EventEmit')
 
@@ -21,6 +21,8 @@ Emit.on('fullpacket', (key, fullPacket) => {
   const {
     method, path, headers, body
   } = util.splitRequest(fullPacket)
+
+  console.log(`[${util.getNowDate()}] ${method} - ${path}`)
 
   const req = http.request({
     host: '127.0.0.1',

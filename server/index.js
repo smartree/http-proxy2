@@ -1,6 +1,6 @@
 const net = require('net')
 const Emit = require('./EventEmit')
-const PacketHub = require('./PacketHub2')
+const PacketHub = require('./PacketHub3')
 const util = require('./util')
 
 const packetHub = new PacketHub()
@@ -59,8 +59,14 @@ Emit.on('fullpacket', (key, fullPacket) => {
   } = util.splitResponse(fullPacket)
 
   if (serverResponses[key]) {
-    serverResponses[key].writeHead(status, headers)
-    serverResponses[key].end(body)
+    try {
+      serverResponses[key].writeHead(status, headers)
+      serverResponses[key].end(body)
+    } catch (e) {
+      serverResponses[key].end()
+      console.log(e)
+      console.log(fullPacket.toString())
+    }
     console.log('resolved key: ', key)
     delete serverResponses[key]
   }

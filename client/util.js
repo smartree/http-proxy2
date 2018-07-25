@@ -7,7 +7,7 @@ const util = {
     return Buffer.concat([_buf, buf], 16 + length)
   },
   generateKey: () => {
-    return ~~(Math.random() * 1e8)
+    return util.randomNum(1000000, 10000000)
   },
   objToStr: (obj) => {
     let retValue = []
@@ -58,6 +58,22 @@ const util = {
     result.push('\n')
     const buf = Buffer.from(result.join('\n'))
     return Buffer.concat([buf, body])
+  },
+  randomNum: (Min, Max) => {  // min ≤ r < max
+    var Range = Max - Min;
+    var Rand = Math.random();
+    var num = Min + Math.floor(Rand * Range); 
+    return num;
+  },
+  getNowDate: () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    const date = now.getDate()
+    const hour = now.getHours()
+    const minute = now.getMinutes()
+    const second = now.getSeconds()
+    return `${year}-${month}-${date} ${hour}:${minute}:${second}`
   }
 }
 
