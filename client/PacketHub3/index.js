@@ -7,7 +7,6 @@ class PacketHub {
       try {
         this.analyseFullPacket()
       } catch(e) {
-        console.log(e)
       }
     }, 16)
   }
@@ -30,6 +29,10 @@ class PacketHub {
     const packetBuffer = this.data.slice(16, nextPacketLength + 16)
     Emit.emit('fullpacket', nextPacketKey, packetBuffer)
     this.data = this.data.slice(16 + nextPacketLength)
+  }
+  
+  clear() {
+    this.data = Buffer.alloc(0)
   }
 }
 
