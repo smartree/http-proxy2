@@ -11,14 +11,20 @@ const util = {
   },
   objToStr: (obj) => {
     let retValue = []
-    for(let i in obj) {
+    for (let i in obj) {
       retValue.push(`${i}: ${obj[i]}`)
     }
     return retValue.join('\n')
   },
-  generateRequest: ({method, version, path, headers, body = ''})  => {
-    return `${method} ${path} HTTP/${version}\n` + 
-    `${util.objToStr(headers)}${body !== '' ? `\n\n${body}` : ''}`
+  generateRequest: ({
+    method,
+    version,
+    path,
+    headers,
+    body = ''
+  }) => {
+    return `${method} ${path} HTTP/${version}\n` +
+      `${util.objToStr(headers)}${body !== '' ? `\n\n${body}` : ''}`
   },
   splitResponse: (responseBuffer) => {
     const headerArray = []
@@ -27,7 +33,7 @@ const util = {
     let startIndex = 0
     let raw = ''
 
-    for(let i = 0; i < bufferLength; i++) {
+    for (let i = 0; i < bufferLength; i++) {
       const char = String.fromCharCode(responseBuffer[i])
       if (char === '\n') {
         raw = responseBuffer.toString('ascii', startIndex, i)
@@ -48,12 +54,16 @@ const util = {
     }).forEach(item => {
       headers[item[0]] = item[1]
     })
-    return { status, headers, body }
+    return {
+      status,
+      headers,
+      body
+    }
   },
-  randomNum: (Min, Max) => {  // min ≤ r < max
+  randomNum: (Min, Max) => { // min ≤ r < max
     var Range = Max - Min;
     var Rand = Math.random();
-    var num = Min + Math.floor(Rand * Range); 
+    var num = Min + Math.floor(Rand * Range);
     return num;
   },
   getNowDate: () => {

@@ -11,7 +11,7 @@ const util = {
   },
   objToStr: (obj) => {
     let retValue = []
-    for(let i in obj) {
+    for (let i in obj) {
       retValue.push(`${i}: ${obj[i]}`)
     }
     return retValue.join('\n')
@@ -23,7 +23,7 @@ const util = {
     let startIndex = 0
     let raw = ''
 
-    for(let i = 0; i < bufferLength; i++) {
+    for (let i = 0; i < bufferLength; i++) {
       const char = String.fromCharCode(requestBuffer[i])
       if (char === '\n' || i === bufferLength - 1) {
         raw = requestBuffer.toString('ascii', startIndex, i)
@@ -47,9 +47,19 @@ const util = {
     }).forEach(item => {
       headers[item[0]] = item[1]
     })
-    return { method, path, headers, body }
+    return {
+      method,
+      path,
+      headers,
+      body
+    }
   },
-  generateResponse: ({code, message, headers, body}) => {
+  generateResponse: ({
+    code,
+    message,
+    headers,
+    body
+  }) => {
     const result = []
     result.push(`HTTP ${code} ${message}`)
     for (let headerName in headers) {
@@ -59,10 +69,10 @@ const util = {
     const buf = Buffer.from(result.join('\n'))
     return Buffer.concat([buf, body])
   },
-  randomNum: (Min, Max) => {  // min ≤ r < max
+  randomNum: (Min, Max) => { // min ≤ r < max
     var Range = Max - Min;
     var Rand = Math.random();
-    var num = Min + Math.floor(Rand * Range); 
+    var num = Min + Math.floor(Rand * Range);
     return num;
   },
   getNowDate: () => {

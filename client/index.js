@@ -1,4 +1,3 @@
-const http = require('http')
 const net = require('net')
 const PacketHub = require('./PacketHub3')
 const util = require('./util')
@@ -29,10 +28,20 @@ const startClient = (publicIP = '127.0.0.1', proxyToPort = 80) => {
 
   Emit.on('fullpacket', async (key, fullPacket) => {
     const {
-      method, path, headers, body
+      method,
+      path,
+      headers,
+      body
     } = util.splitRequest(fullPacket)
     console.log(`\x1b[32m[${util.getNowDate()}]\x1b[0m \x1b[42m\x1b[30m${method}\x1b[0m ${path}`)
-    const result = await requests({ host: '127.0.0.1', port: proxyToPort, path, method, headers, body })
+    const result = await requests({
+      host: '127.0.0.1',
+      port: proxyToPort,
+      path,
+      method,
+      headers,
+      body
+    })
     client.write(util.createWrappedBuf(key, result))
   })
 }

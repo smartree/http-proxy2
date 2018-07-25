@@ -15,7 +15,9 @@ class PacketHub {
   }
 
   analyseFullPacket() {
-    if (this.data.length < 16) { return }
+    if (this.data.length < 16) {
+      return
+    }
     const nextPacketLength = this.data.readUIntBE(0, 8)
     const nextPacketKey = this.data.readUIntBE(8, 8)
     if (`${nextPacketKey}`.length !== 7) {
@@ -27,7 +29,7 @@ class PacketHub {
       this.data = this.data.slice(16 + nextPacketLength)
     }
   }
-  
+
   clear() {
     this.data = Buffer.alloc(0)
     clearInterval(this.intervalId)
@@ -37,8 +39,7 @@ class PacketHub {
     this.intervalId = setInterval(() => {
       try {
         this.analyseFullPacket()
-      } catch(e) {
-      }
+      } catch (e) {}
     }, 16)
   }
 

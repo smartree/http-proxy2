@@ -50,10 +50,23 @@ const startServer = (port = 8081) => {
         body.push(chunk)
       })
       request.on('end', () => {
-        Emit.emit('recvReq', { key, method, version, path, headers, body })
+        Emit.emit('recvReq', {
+          key,
+          method,
+          version,
+          path,
+          headers,
+          body
+        })
       })
     } else {
-      Emit.emit('recvReq', { key, method, version, path, headers })
+      Emit.emit('recvReq', {
+        key,
+        method,
+        version,
+        path,
+        headers
+      })
     }
   })
 
@@ -62,8 +75,21 @@ const startServer = (port = 8081) => {
   server.listen(port)
 
 
-  Emit.on('recvReq', ({ key, method, version, path, headers, body = '' }) => {
-    const header = util.generateRequest({method, version, path, headers, body})
+  Emit.on('recvReq', ({
+    key,
+    method,
+    version,
+    path,
+    headers,
+    body = ''
+  }) => {
+    const header = util.generateRequest({
+      method,
+      version,
+      path,
+      headers,
+      body
+    })
     const buf = Buffer.from(header)
     const packet = util.createWrappedBuf(key, buf)
     if (tunnelSocket) {
@@ -76,7 +102,9 @@ const startServer = (port = 8081) => {
 
   Emit.on('fullpacket', (key, fullPacket) => {
     const {
-      body, headers, status
+      body,
+      headers,
+      status
     } = util.splitResponse(fullPacket)
 
     if (serverResponses[key]) {

@@ -25,38 +25,43 @@ program
   .version('1.1.2')
 
 program.command('server')
-       .description('在指定端口开启服务端监听')
-       .option('-p, --port <port>', '指定的端口')
-       .action(({port}) => {
-          if (!port) {
-            console.log('Please input port!')
-            return
-          }
-          if (isNaN(Number(port))) {
-            console.log('Please input valid port!')
-            return
-          }
-          server(~~port)
-       })
+  .description('在指定端口开启服务端监听')
+  .option('-p, --port <port>', '指定的端口')
+  .action(({
+    port
+  }) => {
+    if (!port) {
+      console.log('Please input port!')
+      return
+    }
+    if (isNaN(Number(port))) {
+      console.log('Please input valid port!')
+      return
+    }
+    server(~~port)
+  })
 
 program.command('client')
-       .description('连接指定的服务端, 并将请求转发至本地指定端口')
-       .option('-s, --server <server>', '指定的服务端IP')
-       .option('-p, --port <port>', '指定的端口')
-       .action(({server, port}) => {
-          if (!port) {
-            console.log('Please input port!')
-            return
-          }
-          if (isNaN(Number(port))) {
-            console.log('Please input valid port!')
-            return
-          }
-          if (!server) {
-            console.log('Please input server ip')
-          }
-          client(server, ~~port)
-       })
+  .description('连接指定的服务端, 并将请求转发至本地指定端口')
+  .option('-s, --server <server>', '指定的服务端IP')
+  .option('-p, --port <port>', '指定的端口')
+  .action(({
+    server,
+    port
+  }) => {
+    if (!port) {
+      console.log('Please input port!')
+      return
+    }
+    if (isNaN(Number(port))) {
+      console.log('Please input valid port!')
+      return
+    }
+    if (!server) {
+      console.log('Please input server ip')
+    }
+    client(server, ~~port)
+  })
 
 
 program.parse(process.argv)
