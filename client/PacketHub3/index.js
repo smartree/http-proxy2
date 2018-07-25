@@ -3,12 +3,7 @@ const Emit = require('../EventEmit/')
 class PacketHub {
   constructor() {
     this.data = Buffer.alloc(0)
-    this.intervalId = setInterval(() => {
-      try {
-        this.analyseFullPacket()
-      } catch(e) {
-      }
-    }, 16)
+    this.intervalId = 0
   }
 
   push(buf) {
@@ -33,7 +28,18 @@ class PacketHub {
   
   clear() {
     this.data = Buffer.alloc(0)
+    clearInterval(this.intervalId)
   }
+
+  startListen() {
+    this.intervalId = setInterval(() => {
+      try {
+        this.analyseFullPacket()
+      } catch(e) {
+      }
+    }, 16)
+  }
+
 }
 
 module.exports = PacketHub

@@ -1,0 +1,27 @@
+{
+  "name": "http-proxy2",
+  "version": "1.0.0",
+  "description": "一个可用于内网穿透的HTTP代理工具",
+  "main": "index.js",
+  "scripts": {
+    "server": "node ./index.js server",
+    "client": "node ./index.js client"
+  },
+  "bin": {
+    "proxy": "./index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjhch123/http-proxy2.git"
+  },
+  "keywords": [],
+  "author": "zjhch123 <416836508@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zjhch123/http-proxy2/issues"
+  },
+  "homepage": "https://github.com/zjhch123/http-proxy2#readme",
+  "dependencies": {
+    "commander": "^2.16.0"
+  }
+}
