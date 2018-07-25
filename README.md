@@ -12,7 +12,7 @@
 5. Client向Server端返回数据
 6. Server端的HTTP服务器向用户返回数据
 
-<img src="https://raw.githubusercontent.com/zjhch123/http-proxy2/master/assets/demo.png" width="500">
+<img src="https://raw.githubusercontent.com/zjhch123/http-proxy2/master/assets/demo.png" width="520">
 
 ## 难点
 1. TCP下的黏包、拆包问题
