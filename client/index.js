@@ -14,6 +14,7 @@ const startClient = (publicIP = '127.0.0.1', proxyToPort = 80) => {
   const client = new net.Socket();
 
   client.connect(PORT, HOST, () => {
+    packetHub.start()
     console.log(`与服务端: ${publicIP} 连接成功, 开始转发请求到本地${proxyToPort}端口`)
   })
 
