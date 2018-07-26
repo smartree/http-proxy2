@@ -1,3 +1,5 @@
+const colors = require('./colors')
+
 const util = {
   createWrappedBuf: (key, buf) => {
     const length = buf.length
@@ -7,12 +9,14 @@ const util = {
     return Buffer.concat([_buf, buf], 16 + length)
   },
   generateKey: () => {
-    return util.randomNum(1000000, 10000000)
+    return util.randomNum(1e6, 1e7)
   },
   objToStr: (obj) => {
     let retValue = []
     for (let i in obj) {
-      retValue.push(`${i}: ${obj[i]}`)
+      if (obj.hasOwnProperty(i)) {
+        retValue.push(`${i}: ${obj[i]}`)
+      }
     }
     return retValue.join('\n')
   },
@@ -84,6 +88,9 @@ const util = {
     const minute = now.getMinutes()
     const second = now.getSeconds()
     return `${year}-${month}-${date} ${hour}:${minute}:${second}`
+  },
+  log: (msg) => {
+    console.log(`${colors.green(`[${util.getNowDate()}]`)} ${msg}`)
   }
 }
 

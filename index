@@ -16,10 +16,7 @@ _     _   _
               |_|         |_|                  |___/ 
 `
 
-
-
-console.log("\x1b[32m", log)
-console.log("\x1b[0m")
+console.log("\x1b[32m", log, "\x1b[0m")
 
 program
   .version('1.1.2')

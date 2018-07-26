@@ -43,9 +43,6 @@ const sendRequest = ({
       const result = util.generateResponse({
         code: 500,
         message: 'Server Error',
-        headers: {
-          Server: 'proxy'
-        },
         body: Buffer.from(`Client can't send request to Proxy Server`)
       })
       resolve(result)

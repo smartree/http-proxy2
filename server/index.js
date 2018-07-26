@@ -1,8 +1,11 @@
 const net = require('net')
+const http = require('http')
+const colors = require('./colors')
 const Emit = require('./EventEmit')
 const PacketHub = require('./PacketHub3')
 const util = require('./util')
-const http = require('http')
+
+const log = util.log
 
 const startServer = (port = 8081) => {
   const packetHub = new PacketHub()
@@ -13,7 +16,7 @@ const startServer = (port = 8081) => {
 
   const createConnectionToTunnel = () => {
     tunnel = net.createServer(socket => {
-      console.log('客户机连接成功！')
+      log(`客户机连接成功!`)
       packetHub.start()
       tunnelSocket = socket
       socket.on('data', (data) => { // 接收到内网主机发来的消息, 内网主机发来的消息是已经包裹完毕的
@@ -24,9 +27,9 @@ const startServer = (port = 8081) => {
         tunnel = null
         tunnelSocket = null
         packetHub.clear()
-        console.log('客户机断开，3秒后重新开始监听客户机连接')
+        log('客户机断开，3秒后重新开始监听客户机连接')
         setTimeout(() => {
-          console.log('重新开始监听')
+          log('重新开始监听')
           createConnectionToTunnel()
         }, 3000)
       })
@@ -70,10 +73,9 @@ const startServer = (port = 8081) => {
     }
   })
 
-  console.log(`开始监听${port}端口`)
+  log(`开始监听${port}端口`)
   server.setMaxListeners(5)
   server.listen(port)
-
 
   Emit.on('recvReq', ({
     key,
@@ -93,7 +95,7 @@ const startServer = (port = 8081) => {
     const buf = Buffer.from(header)
     const packet = util.createWrappedBuf(key, buf)
     if (tunnelSocket) {
-      console.log(`[${util.getNowDate()}] Proxy: ${method} - ${path}`)
+      log(`${colors.bgRed(colors.white('Proxy'))} ${colors.bgGreen(colors.black('method'))} ${path}`)
       tunnelSocket.write(packet)
     } else {
       serverResponses[key].end('There is no client, please connect client to proxy request!')
@@ -113,7 +115,7 @@ const startServer = (port = 8081) => {
         serverResponses[key].end(body)
       } catch (e) {
         serverResponses[key].end()
-        console.log(e)
+        log(e)
       }
       delete serverResponses[key]
     }
