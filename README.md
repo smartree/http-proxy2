@@ -1,5 +1,5 @@
 # 一个可用于内网穿透的HTTP代理工具
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) ![](https://img.shields.io/badge/language-node.js-00ff00.svg)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) ![](https://img.shields.io/badge/language-node.js-00ff00.svg) [![](https://img.shields.io/npm/dw/http-proxy2.svg)](https://www.npmjs.com/package/http-proxy2)
 ## 需要准备的
 一台拥有公网IP的服务器 `node 8.0+`
 一台需要内网穿透的客户端 `node 8.0+`
