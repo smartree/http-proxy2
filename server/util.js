@@ -70,14 +70,17 @@ const util = {
     var num = Min + Math.floor(Rand * Range);
     return num;
   },
+  formatNumber: (number) => {
+    return `${number}`.toString().padStart(2, 0)
+  },
   getNowDate: () => {
     const now = new Date()
     const year = now.getFullYear()
-    const month = now.getMonth() + 1
-    const date = now.getDate()
-    const hour = now.getHours()
-    const minute = now.getMinutes()
-    const second = now.getSeconds()
+    const month = util.formatNumber(now.getMonth() + 1)
+    const date = util.formatNumber(now.getDate())
+    const hour = util.formatNumber(now.getHours())
+    const minute = util.formatNumber(now.getMinutes())
+    const second = util.formatNumber(now.getSeconds())
     return `${year}-${month}-${date} ${hour}:${minute}:${second}`
   },
   log: (msg) => {
