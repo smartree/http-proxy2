@@ -5,6 +5,9 @@ const client = require('./client')
 
 const program = require('commander')
 
+const package = require('./package.json')
+
+
 const log = `
 _     _   _                                         
 | |   | | | |                                        
@@ -19,7 +22,7 @@ _     _   _
 console.log("\x1b[32m", log, "\x1b[0m")
 
 program
-  .version('1.1.2')
+  .version(package.version)
 
 program.command('server')
   .description('在指定端口开启服务端监听')
