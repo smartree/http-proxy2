@@ -36,11 +36,12 @@ const util = {
     let body = null
     let startIndex = 0
     let raw = ''
+    let char = ''
 
     for (let i = 0; i < bufferLength; i++) {
-      const char = String.fromCharCode(responseBuffer[i])
-      if (char === '\n') {
-        raw = responseBuffer.toString('ascii', startIndex, i)
+      char = String.fromCharCode(responseBuffer[i])
+      if (char === '\n' || i === bufferLength - 1) {
+        raw = responseBuffer.toString('ascii', startIndex, i === bufferLength - 1 ? i + 1 : i)
         if (raw.trim() === '') {
           body = responseBuffer.slice(i + 1)
           break
