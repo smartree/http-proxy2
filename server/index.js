@@ -59,7 +59,7 @@ const startServer = (port = 8081) => {
           version,
           path,
           headers,
-          body
+          body: Buffer.concat(body),
         })
       })
     } else {
@@ -92,10 +92,10 @@ const startServer = (port = 8081) => {
       headers,
       body
     })
-    const buf = Buffer.from(header)
+    const buf = header
     const packet = util.createWrappedBuf(key, buf)
     if (tunnelSocket) {
-      log(`${colors.bgRed(colors.white('Proxy'))} ${colors.bgGreen(colors.black('method'))} ${path}`)
+      log(`${colors.bgRed(colors.white('Proxy'))} ${colors.bgGreen(colors.black(method))} ${path}`)
       tunnelSocket.write(packet)
     } else {
       serverResponses[key].end('There is no client, please connect client to proxy request!')

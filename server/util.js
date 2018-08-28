@@ -27,8 +27,13 @@ const util = {
     headers,
     body = ''
   }) => {
-    return `${method} ${path} HTTP/${version}\n` +
-      `${util.objToStr(headers)}${body !== '' ? `\n\n${body}` : ''}`
+    const h = `${method} ${path} HTTP/${version}\n` +
+      `${util.objToStr(headers)}${body !== '' ? `\n\n` : ''}`
+    if (body !== '') {
+      return Buffer.concat([Buffer.from(h), Buffer.from(body)])
+    } else {
+      return Buffer.from(h)
+    }
   },
   splitResponse: (responseBuffer) => {
     const headerArray = []

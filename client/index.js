@@ -36,7 +36,7 @@ const startClient = (publicIP = '127.0.0.1', proxyToPort = 80) => {
       headers,
       body
     } = util.splitRequest(fullPacket)
-    log(`${colors.bgGreen(colors.black('method'))} ${path}`)
+    log(`${colors.bgGreen(colors.black(method))} ${path}`)
     const result = await requests({
       host: '127.0.0.1',
       port: proxyToPort,
