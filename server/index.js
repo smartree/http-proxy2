@@ -15,6 +15,9 @@ const startServer = (port = 8081) => {
   let tunnel = null
 
   const createConnectionToTunnel = () => {
+    if (!!tunnel) {
+      return
+    }
     tunnel = net.createServer(socket => {
       log(`客户机连接成功!`)
       packetHub.start()
